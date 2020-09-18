@@ -64,19 +64,6 @@ int saveImage(Image* I, char* file){
 	return 0;
 }
 
-void SetPixel(Image* I,int i,int j,Pixel p)
-{
-	assert(I && i>=0 && i<I->width && j>=0 && j<I->height);
-	I->data[I->width*j+i] = p;
-}
-
-Pixel GetPixel(Image* I,int i,int j)
-{
-	assert(I && i>=0 && i<I->width && j>=0 && j<I->height);
-	return I->data[I->width*j+i];
-}
-
-
 void GetPartChar(unsigned char x, unsigned char *a, int i){
 	unsigned char mask[4] = {0x03, 0x0C, 0x30, 0xC0};
 	unsigned char p = x & mask[i-1];
@@ -91,35 +78,42 @@ void SetPartChar(unsigned char *x, unsigned char a, int i){
 void codeMessage(Image *I, char* message){
 	int size = strlen(message);
 	unsigned char ssize = (unsigned char)size;
-
+	
+	
 	for(int i = 0; i < 4; i++){
 		unsigned char bits;
-		GetPartChar(ssize, &bits, 4-i%4);
-		SetPartChar(&(I->data[i].b), bits, 1); 
+		GetPartChar(ssize, &bits, i);
+		SetPartChar(&(I->data[i].b), bits, i); 
 	}
 
-	assert(I && size*4 <= I->width*I->height);
+	printf("taille stockée int : %d\n", size);
+        printf("taille stockée : %hhu\n", ssize);
+
+	assert(I && size*4 <= I->width*I->height-4);
 
   	for(int i = 0; i < size*4; i++){
                 unsigned char bits;
                 GetPartChar(message[i/4], &bits, 4-i%4);
-                SetPartChar(&ssize, bits, 1);
+                SetPartChar(&(I->data[i].b), bits, 1);
         }
 }
 
 char* decodeMessage(Image *I){
-        int size = 0;;
+        int size = 0;
         unsigned char ssize;
      
      	for(int i = 0; i < 4; i++){
                 unsigned char bits;
-                GetPartChar(I->data[i].b, &bits, 1);
-                SetPartChar(&ssize, bits, 4-i%4);
+                GetPartChar(I->data[i].b, &bits, i);
+                SetPartChar(&ssize, bits, i);
         }
 	
 	size = (int)ssize;
+	
+	printf("taille lue int : %d\n", size);
+	printf("taille lue : %hhu\n", ssize); 
 
-        assert(I && size*4 <= I->width*I->height);
+        assert(I && size*4 <= I->width*I->height-4);
 
 	char* message = malloc(size+1);
 
@@ -136,7 +130,7 @@ char* decodeMessage(Image *I){
 int main(){
 	Image* I = loadImage("vincent.ppm");
 	
-	codeMessage(I, "salut bitch");
+	codeMessage(I, "salutation");
 	char* message = decodeMessage(I);
 	
 	printf("%s\n", message);
