@@ -82,18 +82,16 @@ void codeMessage(Image *I, char* message){
 	
 	for(int i = 0; i < 4; i++){
 		unsigned char bits;
-		GetPartChar(ssize, &bits, i);
-		SetPartChar(&(I->data[i].b), bits, i); 
+		GetPartChar(ssize, &bits, i+1);
+		SetPartChar(&(I->data[i].b), bits, 1); 
 	}
 
 	printf("taille stockée int : %d\n", size);
         printf("taille stockée : %hhu\n", ssize);
 
-	assert(I && size*4 <= I->width*I->height-4);
-
-  	for(int i = 0; i < size*4; i++){
+  	for(int i = 4; i < (size+1)*4; i++){
                 unsigned char bits;
-                GetPartChar(message[i/4], &bits, 4-i%4);
+                GetPartChar(message[(i/4)-1], &bits, (i%4)+1);
                 SetPartChar(&(I->data[i].b), bits, 1);
         }
 }
@@ -104,8 +102,8 @@ char* decodeMessage(Image *I){
      
      	for(int i = 0; i < 4; i++){
                 unsigned char bits;
-                GetPartChar(I->data[i].b, &bits, i);
-                SetPartChar(&ssize, bits, i);
+                GetPartChar(I->data[i].b, &bits, 1);
+                SetPartChar(&ssize, bits, i+1);
         }
 	
 	size = (int)ssize;
@@ -113,14 +111,12 @@ char* decodeMessage(Image *I){
 	printf("taille lue int : %d\n", size);
 	printf("taille lue : %hhu\n", ssize); 
 
-        assert(I && size*4 <= I->width*I->height-4);
+	char* message = malloc(size*sizeof(char));
 
-	char* message = malloc(size+1);
-
-        for(int i = 0; i < size*4; i++){
+        for(int i = 4; i < (size+1)*4; i++){
                 unsigned char bits;
                 GetPartChar(I->data[i].b, &bits, 1);
-                SetPartChar((unsigned char*)&message[i/4], bits, 4-i%4);
+                SetPartChar(&message[(i/4)-1], bits, i%4+1);
         }
 
 	return message;
@@ -131,11 +127,14 @@ int main(){
 	Image* I = loadImage("vincent.ppm");
 	
 	codeMessage(I, "salutation");
-	char* message = decodeMessage(I);
+	
+	saveImage(I, "encrypted.ppm");
+	Image* ENC = loadImage("encrypted.ppm");
+
+	char* message = decodeMessage(ENC);
 	
 	printf("%s\n", message);
 
-	saveImage(I, "clonevincent.ppm");
 	deleteImage(I);
 	
 	free(message);
