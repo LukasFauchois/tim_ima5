@@ -1,0 +1,102 @@
+/m {moveto} def
+/l {lineto} def
+/s {closepath stroke} def
+/S {stroke} def
+
+/cadre{
+  newpath
+  125 400 m
+  250 400 l
+  400 525 l
+  395 550 l
+  200 550 l
+  125 400 l
+  10 setlinewidth
+  1 setlinejoin
+  s
+
+  newpath
+  250 400 m
+  180 600 l
+  0 setlinejoin
+  9 setlinewidth
+  s
+}def
+
+/fourche{
+  newpath
+  390 575 m
+  425 400 l
+  0 setlinejoin
+  12 setlinewidth
+  s
+}def
+
+/potence{
+  newpath
+  390 575 m
+  420 575 l
+  1 setlinejoin
+  10 setlinewidth
+  s
+}def
+
+/guidon{
+  420 550 25 270 90 arc
+  1 setlinejoin
+  10 setlinewidth
+  S
+}def
+
+/selle{
+  160 600 m
+  210 600 l
+  1 setlinejoin
+  10 setlinewidth
+  s
+}def
+
+/roues{
+  125 400 100 0 360 arc
+  S
+  425 400 100 0 360 arc
+  S
+}def
+
+/pedalier{
+  250 400 30 0 360 arc
+  5 setlinewidth
+  S
+  newpath
+  250 400 m
+  250 350 l
+  8 setlinewidth
+  s
+}def
+
+/rouelibre{
+  125 400 15 0 360 arc
+  5 setlinewidth
+  S
+}def
+
+/chaine{
+  newpath
+  125 415 m
+  250 430 l
+  s
+  newpath
+  125 385 m
+  250 370 l
+  s
+}def
+
+cadre
+fourche
+potence
+guidon
+selle
+roues
+pedalier
+rouelibre
+chaine
