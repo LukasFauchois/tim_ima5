@@ -4,7 +4,7 @@ L'objectif de ce TP est de manipuler le son, notamment par le biais du Time-Stre
 
 ## Les fichiers WAV
 
-###main.cpp
+### main.cpp
 - L'archive contient un exemple d'utilisation de la classe d'extraction de fichiers WAV. Afin de compiler, j'utilise l'utilitaire g++ :
 
   > g++ -lm main.cpp fft.cpp wavdata.cpp -o exec -Wall -Wextra
@@ -16,12 +16,12 @@ L'objectif de ce TP est de manipuler le son, notamment par le biais du Time-Stre
     * Un bloc décrivant le format audio : ce bloc nous donne les informations concernant le format, dans notre cas le format .WAV.
     * Un bloc de données : ce bloc indique l'ID des données ainsi que le nombre d'octets de données.
 
-###son_pur.cpp
+### son_pur.cpp
 - A partir de cet exemple, nous allons pourvoir créer un fichier audio sur lequel on trouvera un son pur. Un son pur étant un son dont l'onde est parfaitement sinusoïdale, j'utilise la formule suivant *AMPLITUDE x (sin(omega x t)+1)* avec *omega = 2 x PI x fréquence de hauteur du LA* et *t = i / fréquence d'échantillonage*. En sauvegardant les échantillons dans un classeur, nous visualisons le signal suivant :
 
 //Ajouter le screen du graphique open office
 
-###son_etire.cpp
+### son_etire.cpp
 - Afin d'étirer la durée de la trame sonore, je dédouble mes échantillons, ce qui me permet de doubler, en durée, ma trame. Aux niveaux de la fréquence du son pur, on constate un changement de fréquence. De la même façon, avec un signal complexe on constate une élongation dans le domaine temporel mais les fréquences sont modifiées. Nous allons désormais utiliser le Time-Stretching afin de changer la durée d'un échantillon sonore sans en modifier le ton.
 
 ## Time-stretching
