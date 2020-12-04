@@ -1,6 +1,6 @@
 #include <iostream>
-#include "wavdata.h"
-#include "fft.h"
+#include "../wavdata.h"
+#include "../fft.h"
 #include <math.h>
 
 #include <fstream>
@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 	char *data = new char[SIZE];
 
   WavData w1;
-	w1.load("COW.WAV");
+	w1.load("../COW.WAV");
 	char *data1 = w1.data();
 
 	int i;

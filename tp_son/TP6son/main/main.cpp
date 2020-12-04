@@ -1,6 +1,6 @@
 #include <iostream>
-#include "wavdata.h"
-#include "fft.h"
+#include "../wavdata.h"
+#include "../fft.h"
 #include <math.h>
 
 #define DELAY 5000
@@ -9,7 +9,7 @@
 int main(int argc, char **argv)
 {
 	WavData w;
-	w.load("COW.WAV");
+	w.load("../COW.WAV");
 
 	char *data = w.data();
 	char *data2 = new char[w.datasize()*2];

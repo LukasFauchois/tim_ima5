@@ -1,6 +1,6 @@
 #include <iostream>
-#include "wavdata.h"
-#include "fft.h"
+#include "../wavdata.h"
+#include "../fft.h"
 #include <math.h>
 
 #include <fstream>
@@ -26,7 +26,8 @@ int main(int argc, char **argv)
     float omega = 2.0*M_PI*LA;
     data[i]=AMPLITUDE*(sin(omega*t)+1);
     printf("%i ; ", data[i]);
-    file << data[i] << endl; //écriture des valeurs dans le tableur
+    string line = to_string(t) + ";" + to_string((int)data[i]);
+    file << line << endl; //écriture des valeurs dans le tableur
   }
 
   w.setAudioFormat(1); //1 pour pcm
