@@ -19,7 +19,7 @@ L'objectif de ce TP est de manipuler le son, notamment par le biais du Time-Stre
 ### son_pur
 - A partir de cet exemple, nous allons pourvoir créer un fichier audio sur lequel on trouvera un son pur. Un son pur étant un son dont l'onde est parfaitement sinusoïdale, j'utilise la formule suivant **AMPLITUDE x (sin(omega x t)+1)** avec **omega = 2 x PI x fréquence de hauteur du LA** et **t = i / fréquence d'échantillonage**. En sauvegardant les échantillons dans un classeur, nous visualisons le signal suivant :
 
-![img](./son_pur/pur.png?raw=true "Visualisation son pur"?style=center) 
+![img](./son_pur/pur.png?raw=true "Visualisation son pur"#center) 
 
 ### son_etire
 - Afin d'étirer la durée de la trame sonore, je dédouble mes échantillons, ce qui me permet de doubler, en durée, ma trame. Aux niveaux de la fréquence du son pur, on constate un changement de fréquence. De la même façon, avec un signal complexe on constate une élongation dans le domaine temporel mais les fréquences sont modifiées. Nous allons désormais utiliser le Time-Stretching afin de changer la durée d'un échantillon sonore sans en modifier le ton.
