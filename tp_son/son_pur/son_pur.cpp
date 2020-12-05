@@ -25,7 +25,6 @@ int main(int argc, char **argv)
     float t = (i*1.0)/FREQUENCY;
     float omega = 2.0*M_PI*LA;
     data[i]=AMPLITUDE*(sin(omega*t)+1);
-    printf("%i ; ", data[i]);
     string line = to_string(t) + ";" + to_string((int)data[i]);
     file << line << endl; //écriture des valeurs dans le tableur
   }
